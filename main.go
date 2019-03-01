@@ -1,14 +1,16 @@
 package main
 
 import (
- "github.com/gin-gonic/gin"
- "net/http"
+    "github.com/gin-gonic/gin"
+    _ "github.com/go-sql-driver/mysql"
+    "net/http"
 )
 
 func main() {
-	// 
-	router := gin.Default()
-	// 
+    //创建一个路由Handler
+    router:=gin.Default()
+
+    // 
 	router.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "It works")
 		// c.JSON(200, gin.H{
@@ -16,21 +18,10 @@ func main() {
 		// })
 	})
 	//
-	router.GET("/welcome:name", func(c *gin.Context) {
-		name := c.Param("name")
-        firstname := c.DefaultQuery("firstname", "Guest")
-        lastname := c.Query("lastname")
-
-        c.String(http.StatusOK, "Hello %s %s", firstname, lastname)
+	router.GET("/welcome", func(c *gin.Context) {
+        name := c.Query("name")
+        sex := c.DefaultQuery("sex", "10")
+        c.String(http.StatusOK, "My name is %s, sex is %s.", name, sex)
     })
-    // 
-    router.GET("/async", func(c *gin.Context) {
-	    cCp := c.Copy()
-	    go func() {
-	        time.Sleep(5 * time.Second)
-	        log.Println("Done! in path" + cCp.Request.URL.Path)
-	    }()
-	})
-	//
-	router.Run(":8000")
+    router.Run(":88")
 }
