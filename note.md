@@ -3,7 +3,6 @@
 
 ## 安装gin
 	go get github.com/gin-gonic/gin
-	go get gopkg.in/gin-gonic/gin.v1
 	go get github.com/go-sql-driver/mysql
 
 ## 路由  => 采用的路由库是 httprouter
